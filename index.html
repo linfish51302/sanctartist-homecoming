@@ -254,7 +254,7 @@
     <div class="magic-particles"></div>
 
     <div class="book-container">
-        <!-- 🌟 框內專屬動態影片底圖與遮罩（加入 loop 屬性與 JS 保證流暢循環） -->
+        <!-- 🌟 框內專屬動態影片底圖與遮罩 -->
         <video class="box-video-bg" id="bgVideo" autoplay muted loop playsinline>
             <source src="homecoming-bg.mp4" type="video/mp4">
             您的瀏覽器不支援影片背景。
@@ -299,12 +299,26 @@
         </div>
     </div>
 
-    <!-- 確保影片播放結束時強制重新播放，達到完美無縫循環 -->
+    <!-- 🌟 強制啟動自動播放與循環播放的 JavaScript -->
     <script>
-        const video = document.getElementById('bgVideo');
-        video.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById('bgVideo');
+            video.muted = true; // 確保靜音以符合瀏覽器自動播放政策
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // 若遭到瀏覽器阻擋，當使用者在頁面上點擊或移動時自動恢復播放
+                    document.addEventListener('click', function() {
+                        video.play();
+                    }, { once: true });
+                });
+            }
+
+            // 無縫循環觸發
+            video.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            });
         });
     </script>
 
