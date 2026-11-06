@@ -89,7 +89,7 @@
             }
         }
 
-        /* --- 互動標題與魔法陣區塊（魔法陣常駐顯示，內部包含「點擊進入」） --- */
+        /* --- 互動標題與魔法陣區塊 --- */
         .interactive-title-container {
             position: relative;
             width: 100%;
@@ -118,13 +118,13 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* 背景魔法陣：常駐顯示，賦予呼吸燈或柔和光暈，讓讀者知道可點擊 */
+        /* 背景魔法陣：常駐顯示與呼吸燈特效 */
         .magic-star-bg {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 180px; /* 控制魔法陣大小，可依需求微調 */
+            width: 180px;
             height: auto;
             opacity: 0.85;
             filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6));
@@ -151,7 +151,7 @@
             letter-spacing: 0.3em;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 232, 117, 0.8);
             z-index: 2;
-            pointer-events: none; /* 確保點擊事件穿透到外層容器 */
+            pointer-events: none;
         }
 
         /* 標題圖片：平時隱藏，游標移過去才浮現 */
@@ -172,7 +172,7 @@
         }
 
         .interactive-title-container:hover .magic-enter-text {
-            opacity: 0.3; /* 游標移過時讓文字稍微淡化，凸顯浮現的標題 */
+            opacity: 0.3;
             transition: opacity 0.3s ease;
         }
 
@@ -254,8 +254,8 @@
     <div class="magic-particles"></div>
 
     <div class="book-container">
-        <!-- 🌟 框內專屬動態影片底圖與遮罩 -->
-        <video class="box-video-bg" autoplay muted loop playsinline>
+        <!-- 🌟 框內專屬動態影片底圖與遮罩（加入 loop 屬性與 JS 保證流暢循環） -->
+        <video class="box-video-bg" id="bgVideo" autoplay muted loop playsinline>
             <source src="homecoming-bg.mp4" type="video/mp4">
             您的瀏覽器不支援影片背景。
         </video>
@@ -270,14 +270,11 @@
                 <p style="font-family: 'Cinzel', serif; color: var(--gold-accent); letter-spacing: 0.35em; font-size: 0.75rem; opacity: 0.75; margin-top: 6px;">WHITE MAGIC ART STUDIO</p>
             </div>
             
-            <!-- 互動式標題與魔法陣區塊（魔法陣常駐，內部包含「點擊進入」） -->
+            <!-- 互動式標題與魔法陣區塊（常駐魔法陣與「點擊進入」） -->
             <div class="interactive-title-container" onclick="location.href='prologue.html';">
                 <div class="logo-stack">
-                    <!-- 常駐顯示的呼吸燈魔法陣 -->
                     <img src="star.png" alt="魔法陣背景" class="magic-star-bg">
-                    <!-- 魔法陣內部的燙金文字 -->
                     <div class="magic-enter-text">點 擊 進 入</div>
-                    <!-- 懸停時才浮現的標題 Logo -->
                     <img src="homecoming-title-2.png" alt="聖術師：返鄉" class="title-img">
                 </div>
             </div>
@@ -301,6 +298,15 @@
             </ul>
         </div>
     </div>
+
+    <!-- 確保影片播放結束時強制重新播放，達到完美無縫循環 -->
+    <script>
+        const video = document.getElementById('bgVideo');
+        video.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        });
+    </script>
 
 </body>
 </html>
