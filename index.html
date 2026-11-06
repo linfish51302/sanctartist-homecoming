@@ -6,19 +6,56 @@
     <title>聖術師 - 返鄉 | 官方小說網站</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* 書本容器：套用《返鄉》專屬的新背景封面 (例如命名為 homecoming-cover.png) */
+        /* 讓頁面滿版並隱藏卷軸，以影片作為全局動態底圖 */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #080808;
+        }
+
+        /* 動態影片背景容器 */
+        .video-bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-bg-container video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            filter: brightness(0.65); /* 稍微調暗影片亮度，確保文字清晰易讀 */
+        }
+
+        /* 覆蓋一層暗色漸層遮罩，讓氛圍更深邃神祕 */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.5), rgba(5, 5, 5, 0.75));
+            z-index: -1;
+        }
+
+        /* 書本容器：透明懸浮風格，完美襯托下方的動態影片背景 */
         .book-container {
-            background: linear-gradient(135deg, rgba(18, 18, 18, 0.6), rgba(10, 10, 10, 0.75)), 
-                        url('homecoming-cover.png') no-repeat center center;
-            background-size: cover;
+            background: rgba(12, 12, 12, 0.65);
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(212, 175, 55, 0.4);
             border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.15);
             padding: 50px 30px;
             max-width: 800px;
             margin: 40px auto;
             position: relative;
             text-align: center;
+            z-index: 2;
         }
 
         /* 上方工作室 Logo 區塊 */
@@ -54,21 +91,26 @@
             }
         }
 
-        /* --- 互動標題區塊 --- */
+        /* --- 互動標題區塊（游標移過去才浮現標題與魔法陣） --- */
         .interactive-title-container {
             position: relative;
             width: 100%;
             max-width: 420px;
+            min-height: 120px; /* 保留空間供點擊與提示顯示 */
             margin: 0 auto 25px auto;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             cursor: pointer;
         }
 
         .logo-stack {
             position: relative;
             width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo-stack img {
@@ -78,50 +120,57 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* 背景魔法陣：純放大與發光，不旋轉 */
+        /* 背景魔法陣：平時完全隱藏 (opacity: 0)，游標移過去才浮現 */
         .magic-star-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0.2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            opacity: 0;
             filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
             z-index: 1;
+            transition: all 0.5s ease;
         }
 
+        /* 標題圖片：平時透明隱藏 (opacity: 0)，確保不擋住背景 */
         .title-img {
             position: relative;
             z-index: 2;
+            opacity: 0; /* 平時隱藏 */
+            transform: translateY(5px);
             filter: drop-shadow(0 0 15px rgba(212,175,55,0.6));
+            transition: all 0.5s ease;
         }
 
+        /* 燙金提示文字 */
         .click-hint {
             position: relative;
             z-index: 2;
             font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--gold-accent);
             letter-spacing: 0.25em;
-            margin-top: 12px;
-            opacity: 0.7;
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            margin-top: 15px;
+            opacity: 0.85;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+            transition: opacity 0.3s ease;
         }
 
+        /* --- 滑鼠懸停時的魔法浮現特效 --- */
         .interactive-title-container:hover .magic-star-bg {
-            opacity: 0.95;
-            transform: scale(1.06);
+            opacity: 0.9; /* 魔法陣發光浮現 */
+            transform: translate(-50%, -50%) scale(1.05);
             filter: drop-shadow(0 0 25px rgba(255, 232, 117, 0.9));
         }
 
         .interactive-title-container:hover .title-img {
+            opacity: 1; /* 標題圖片浮現 */
+            transform: translateY(0);
             filter: drop-shadow(0 0 25px rgba(255, 232, 117, 0.95));
-            transform: scale(1.02);
         }
 
         .interactive-title-container:hover .click-hint {
-            opacity: 1;
-            transform: translateY(2px);
-            text-shadow: 0 0 12px rgba(255, 232, 117, 0.8);
+            opacity: 0.4; /* 游標移過時讓提示字稍微淡化，凸顯浮現的標題 */
         }
 
         /* 純淨發光燙金呼吸燈特效 */
@@ -196,6 +245,15 @@
 </head>
 <body>
 
+    <!-- 動態影片背景與遮罩 -->
+    <div class="video-bg-container">
+        <video autoplay muted loop playsinline>
+            <source src="homecoming-bg.mp4" type="video/mp4">
+            您的瀏覽器不支援影片背景。
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+
     <!-- 魔法漂浮光點背景 -->
     <div class="magic-particles"></div>
 
@@ -208,17 +266,16 @@
                 <p style="font-family: 'Cinzel', serif; color: var(--gold-accent); letter-spacing: 0.35em; font-size: 0.75rem; opacity: 0.75; margin-top: 6px;">WHITE MAGIC ART STUDIO</p>
             </div>
             
-            <!-- 互動式標題區塊（點擊前往返鄉序章 prologue.html） -->
+            <!-- 互動式標題區塊（平時只有燙金提示，游標移過才浮現魔法陣與標題） -->
             <div class="interactive-title-container" onclick="location.href='prologue.html';">
                 <div class="logo-stack">
                     <img src="star.png" alt="魔法陣背景" class="magic-star-bg">
-                    <!-- 請準備一張寫著「聖術師：返鄉」的去背標題圖，例如 homecoming-title.png -->
                     <img src="homecoming-title-2.png" alt="聖術師：返鄉" class="title-img">
                 </div>
                 <div class="click-hint">✦ 點 擊 以 上 標 題 翻 開 序 章 ✦</div>
             </div>
 
-           <!-- 《返鄉》專屬小說前言簡介（直接使用與前作相同的經典史詩開場） -->
+            <!-- 小說前言簡介 -->
             <p class="novel-intro">
                 當滾滾雷聲劃破夜空時，你可曾想過，那或許不是暴雨將至的預兆，而是ㄧ群隱密的人正在黑夜中為你與惡魔浴血奮戰？當滔天巨浪洶湧翻騰時，你可曾想過，那或許不是惡劣的天氣所致，而是他們正乘風破浪，為了守護這座世界而奔赴戰場？在他們之中，有人能憑藉意念撫平致命的傷口，有人能徒手移山倒海。他們從不公開現身，卻曾在歷史的陰影裡悄悄扭轉了無數文明的命運。其真實身份早已湮沒在歲月的塵埃中，唯有一個古老的稱呼流傳至今——<span class="gold-breathe">聖術師</span>。
             </p>
@@ -231,7 +288,7 @@
         <div class="nav-section">
             <div class="nav-title">Navigation</div>
             <ul class="nav-links">
-               <li><a href="https://linfish51302.github.io/sanctarist-novel/universe.html" target="_blank">聖術師宇宙觀</a></li>
+                <li><a href="https://linfish51302.github.io/sanctarist-novel/universe.html" target="_blank">聖術師宇宙觀</a></li>
                 <li><a href="character-gallery.html">角色形象專欄</a></li>
                 <li><a href="toc.html">完整章節目錄</a></li>
             </ul>
