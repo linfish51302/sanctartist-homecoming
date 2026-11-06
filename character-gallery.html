@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>角色形象專欄 - 聖術師：返鄉</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 角色形象專欄專屬高質感奇幻排版 */
+        .gallery-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .gallery-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--gold-accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .gallery-header p {
+            color: #a39b8b;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* 網格排列：史詩畫廊感 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .gallery-card {
+            background: rgba(18, 18, 18, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .gallery-card:hover {
+            border-color: rgba(212, 175, 55, 0.9);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            transform: translateY(-6px);
+        }
+
+        .gallery-img-box {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: #080808;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: sepia(10%) contrast(105%);
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .gallery-card:hover .gallery-img-box img {
+            transform: scale(1.02);
+            filter: sepia(0%) contrast(110%);
+        }
+
+        .gallery-caption {
+            padding: 25px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(18,18,18,0.8), rgba(10,10,10,0.98));
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .gallery-caption h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold-accent);
+            margin-bottom: 8px;
+            letter-spacing: 0.1em;
+        }
+
+        .gallery-caption .char-title {
+            font-size: 0.85rem;
+            color: #a39b8b;
+            letter-spacing: 0.15em;
+            margin-bottom: 12px;
+        }
+
+        .view-detail-hint {
+            font-size: 0.75rem;
+            color: var(--gold-accent);
+            opacity: 0.7;
+            letter-spacing: 0.15em;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-card:hover .view-detail-hint {
+            opacity: 1;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+        }
+
+        /* --- 彈出視窗（Modal）高質感暗黑奇幻設計 --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(10, 10, 10, 0.98));
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 40px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.25);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: var(--gold-accent);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold-accent);
+            margin-bottom: 5px;
+            letter-spacing: 0.1em;
+        }
+
+        .modal-subtitle {
+            font-size: 0.9rem;
+            color: #a39b8b;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .modal-body {
+            color: #e0d6c3;
+            font-size: 1rem;
+            line-height: 2.2;
+            text-align: justify;
+            margin-bottom: 25px;
+        }
+
+        .modal-quote {
+            font-family: 'Cinzel', serif;
+            font-style: italic;
+            color: #ffe875;
+            background: rgba(212, 175, 55, 0.08);
+            border-left: 3px solid var(--gold-accent);
+            padding: 15px 20px;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            border-radius: 0 6px 6px 0;
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 魔法漂浮光點背景 -->
+    <div class="magic-particles"></div>
+
+    <div class="book-container gallery-container">
+        <!-- 頂部 Logo -->
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="index.html">
+                <img src="whitemagic-logo.png" alt="白魔法藝術工作室 Logo" style="max-width: 110px; height: auto; filter: drop-shadow(0 0 10px rgba(212,175,55,0.6)); opacity: 0.95;">
+            </a>
+            <p style="font-family: 'Cinzel', serif; color: var(--gold-accent); letter-spacing: 0.35em; font-size: 0.75rem; opacity: 0.75; margin-top: 8px;">WHITE MAGIC ART STUDIO</p>
+        </div>
+
+        <!-- 專欄標題 -->
+        <div class="gallery-header">
+            <h2>角色形象專欄</h2>
+            <p>SANCTARIST: HOMECOMING CHARACTER GALLERY</p>
+        </div>
+
+        <!-- 角色海報網格 -->
+        <div class="gallery-grid">
+            <!-- 1. 梁景皓 -->
+            <div class="gallery-card" onclick="openModal('jinghao')">
+                <div class="gallery-img-box">
+                    <img src="jinghaonew.png" alt="梁景皓">
+                </div>
+                <div class="gallery-caption">
+                    <h3>梁景皓</h3>
+                    <div class="char-title">LIANG JINGHAO</div>
+                    <div class="view-detail-hint">✦ 點擊觀看角色檔案</div>
+                </div>
+            </div>
+
+            <!-- 2. 梁景毅 -->
+            <div class="gallery-card" onclick="openModal('jingyi')">
+                <div class="gallery-img-box">
+                    <img src="jingyinew.png" alt="梁景毅">
+                </div>
+                <div class="gallery-caption">
+                    <h3>梁景毅</h3>
+                    <div class="char-title">LIANG JINGYI</div>
+                    <div class="view-detail-hint">✦ 點擊觀看角色檔案</div>
+                </div>
+            </div>
+
+            <!-- 3. 梁晉輝 -->
+            <div class="gallery-card" onclick="openModal('jinhui')">
+                <div class="gallery-img-box">
+                    <img src="jinhuinew.png" alt="梁晉輝">
+                </div>
+                <div class="gallery-caption">
+                    <h3>梁晉輝</h3>
+                    <div class="char-title">LIANG JINHUI</div>
+                    <div class="view-detail-hint">✦ 點擊觀看角色檔案</div>
+                </div>
+            </div>
+
+            <!-- 4. 梁昱鎧 -->
+            <div class="gallery-card" onclick="openModal('yukai')">
+                <div class="gallery-img-box">
+                    <img src="yukainew.png" alt="梁昱鎧">
+                </div>
+                <div class="gallery-caption">
+                    <h3>梁昱鎧</h3>
+                    <div class="char-title">LIANG YUKAI</div>
+                    <div class="view-detail-hint">✦ 點擊觀看角色檔案</div>
+                </div>
+            </div>
+
+            <!-- 5. 炎君-張國豪 -->
+            <div class="gallery-card" onclick="openModal('guohao')">
+                <div class="gallery-img-box">
+                    <img src="guohaonew.png" alt="炎君-張國豪">
+                </div>
+                <div class="gallery-caption">
+                    <h3>張國豪 (炎君)</h3>
+                    <div class="char-title">FLAME LORD</div>
+                    <div class="view-detail-hint">✦ 點擊觀看角色檔案</div>
+                </div>
+            </div>
+
+            <!-- 6. 食人君-曾永華 -->
+            <div class="gallery-card" onclick="openModal('yonghua')">
+                <div class="gallery-img-box">
+                    <img src="yonghuanew.png" alt="食人君-曾永華">
+                </div>
+                <div class="gallery-caption">
+                    <h3>曾永華 (食人君)</h3>
+                    <div class="char-title">DEVOURER LORD</div>
+                    <div class="view-detail-hint">✦ 點擊觀看角色檔案</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部返回導覽 -->
+        <div class="nav-footer" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 25px;">
+            <a href="index.html" class="magical-btn" style="padding: 10px 20px; font-size: 0.85rem;">← 返回首頁</a>
+            <a href="toc.html" class="magical-btn" style="padding: 10px 20px; font-size: 0.85rem;">前往目錄 📖</a>
+        </div>
+    </div>
+
+    <!-- 彈出視窗結構 -->
+    <div class="modal-overlay" id="characterModal" onclick="outsideClose(event)">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-title" id="modalTitle">角色名稱</div>
+            <div class="modal-subtitle" id="modalSubtitle">身分與類型</div>
+            <div class="modal-body" id="modalBody">詳細敘述文字...</div>
+            <div class="modal-quote" id="modalQuote">「角色經典台詞」</div>
+        </div>
+    </div>
+
+    <!-- 互動控制 JavaScript -->
+    <script>
+        const characterData = {
+            jinghao: {
+                title: "梁景皓",
+                subtitle: "LIANG JINGHAO ｜ 木之元素使",
+                body: "梁家次子，擁有出色的木之聖術天賦。與重視戰鬥及家族使命的父親不同，他始終相信聖術也能成為救人的力量。離開家族多年後，他選擇以平凡的生活守護兒子，卻逐漸發現，自己終究無法逃離過去。",
+                quote: "「木瞳術｜共感：能夠感知他人的情緒變化，察覺言語背後難以表達的心情。元素使天賦｜花語：能夠吸收不同花卉的精華，藉此獲得各種特殊能力。」"
+            },
+            jingyi: {
+                title: "梁景毅",
+                subtitle: "LIANG JINGYI ｜ 木之術器使",
+                body: "梁家長子，理性、嚴謹，習慣將責任放在個人情感之前。作為木之術器使，他以堅不可摧的防禦與精準的戰鬥方式著稱。看似冷漠的態度背後，藏著對家族難以割捨的牽掛。",
+                quote: "「木瞳術｜護盾：擁有強大的精神防禦能力，能夠抵禦敵人的心靈控制。術器：黑金色長槍，能操控植物並創造玄武木。」"
+            },
+            jinhui: {
+                title: "梁晉輝",
+                subtitle: "LIANG JINHUI ｜ 木之元素使",
+                body: "梁家家主，也是茂陽集團的重要掌權者。擁有深不可測的木之聖術實力，對家族傳承與責任有著強烈的信念。然而，掌握記憶力量的他，似乎也隱藏著某些不願讓家人知曉的過去。",
+                quote: "「木瞳術｜記憶：能夠讀取他人的記憶，甚至進行竄改與抹除。元素使天賦｜忘憂木：具有強大的攻擊、驅魔與記憶儲存能力。」"
+            },
+            yukai: {
+                title: "梁昱鎧",
+                subtitle: "LIANG JUKAI ｜ 10歲・國小四年級",
+                body: "景皓的兒子，個性善良、好奇心旺盛，喜歡漫畫與充滿想像力的故事。原本只是個平凡的小學生，直到某天，他的雙眼突然變成綠色，開始聽見周圍人們的心聲，也因此踏入父親一直隱瞞的世界。",
+                quote: "「木瞳術｜讀心：能夠直接讀取他人的心聲，聽見對方未曾說出口的想法。（其他天賦尚未覺醒或確認）」"
+            },
+            guohao: {
+                title: "張國豪 (炎君)",
+                subtitle: "FLAME LORD ｜ 魔君",
+                body: "自陽明山沉睡中甦醒的神祕魔君，擁有令人畏懼的火焰力量。冷峻而難以捉摸的外表下，卻藏著一段連自己都無法想起的過去。隨著記憶的碎片逐漸浮現，一場跨越數十年的恩怨，也開始重新燃燒。",
+                quote: "「魔力特性｜火焰：擁有極具破壞力的火之魔力，能夠操縱猛烈的火焰，展現遠超常人的力量。」"
+            },
+            yonghua: {
+                title: "曾永華 (食人君)",
+                subtitle: "DEVOURER LORD ｜ 魔君",
+                body: "四魔君之一，總是帶著輕浮而難以捉摸的笑容。擁有改變容貌的詭異魔力，能夠隱藏身分、遊走於人群之中。他似乎知道許多不為人知的秘密，卻總喜歡在最關鍵的時刻，留下令人不安的笑容。",
+                quote: "「魔力特性｜擬態易容：透過攝取他人的血肉偽裝成對方。身邊經常伴隨一隻神祕的金色甲蟲。」"
+            }
+        };
+
+        function openModal(charKey) {
+            const data = characterData[charKey];
+            if (!data) return;
+
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalSubtitle').innerText = data.subtitle;
+            document.getElementById('modalBody').innerText = data.body;
+            document.getElementById('modalQuote').innerText = data.quote;
+
+            document.getElementById('characterModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // 背景禁止滾動
+        }
+
+        function closeModal() {
+            document.getElementById('characterModal').classList.remove('active');
+            document.body.style.overflow = 'auto'; // 恢復背景滾動
+        }
+
+        function outsideClose(event) {
+            if (event.target.id === 'characterModal') {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
