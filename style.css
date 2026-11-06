@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@400;500;700&display=swap');
+
+:root {
+    --bg-dark: #07080b;
+    --text-color: #e4d8c5;
+    --gold-accent: #d4af37;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    font-family: 'Noto Serif TC', serif;
+    margin: 0;
+    padding: 0;
+    line-height: 2.2;
+    letter-spacing: 0.05em;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 魔法漂浮光點背景動畫 */
+.magic-particles {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #d4af37, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #d4af37, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: floatParticles 20s linear infinite;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+@keyframes floatParticles {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-200px); }
+}
+
+/* 書本容器：以 cover.png 作為半透明背景，疊加深色遮罩確保文字清晰 */
+.book-container {
+    max-width: 780px;
+    width: 90%;
+    background-color: rgba(10, 11, 14, 0.85); /* 半透明暗色底，保護文字辨識度 */
+    border: 2px solid var(--gold-accent);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.2);
+    padding: 55px 75px;
+    position: relative;
+    z-index: 10;
+    animation: bookOpen 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    
+    /* 套用 cover.png 作為背景圖，並調低透明度與適當覆蓋 */
+    background-image: linear-gradient(rgba(10, 11, 14, 0.82), rgba(10, 11, 14, 0.82)), url('cover.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.book-container::before {
+    content: '';
+    position: absolute;
+    top: 6px; left: 6px; right: 6px; bottom: 6px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    pointer-events: none;
+}
+
+@keyframes bookOpen {
+    0% {
+        transform: perspective(1000px) rotateY(-15deg) scale(0.95);
+        opacity: 0;
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+.divider {
+    text-align: center;
+    color: var(--gold-accent);
+    margin: 25px 0;
+    font-size: 1.1rem;
+    opacity: 0.6;
+}
+
+/* 仿古燙金按鈕 */
+.magical-btn {
+    display: inline-block;
+    font-family: 'Cinzel', 'Noto Serif TC', serif;
+    background-color: rgba(7, 8, 11, 0.7);
+    border: 1px solid var(--gold-accent);
+    color: var(--gold-accent);
+    padding: 12px 35px;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    transition: all 0.4s ease;
+    text-align: center;
+}
+
+.magical-btn:hover {
+    background-color: var(--gold-accent);
+    color: #07080b;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+}
+/* 呼吸閃動燙金字特效 */
+@keyframes goldBreathe {
+    0% {
+        color: #d4af37;
+        text-shadow: 0 0 4px rgba(212, 175, 55, 0.4), 0 0 10px rgba(212, 175, 55, 0.2);
+    }
+    50% {
+        color: #ffe875;
+        text-shadow: 0 0 12px rgba(255, 232, 117, 0.9), 0 0 25px rgba(212, 175, 55, 0.6);
+    }
+    100% {
+        color: #d4af37;
+        text-shadow: 0 0 4px rgba(212, 175, 55, 0.4), 0 0 10px rgba(212, 175, 55, 0.2);
+    }
+}
+
+.gold-breathe {
+    display: inline-block;
+    font-weight: bold;
+    animation: goldBreathe 3s ease-in-out infinite;
+}

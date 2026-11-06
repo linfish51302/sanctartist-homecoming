@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聖術師 - 返鄉 | 官方小說網站</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 書本容器：套用《返鄉》專屬的新背景封面 (例如命名為 homecoming-cover.png) */
+        .book-container {
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.6), rgba(10, 10, 10, 0.75)), 
+                        url('homecoming-cover.png') no-repeat center center;
+            background-size: cover;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
+            padding: 50px 30px;
+            max-width: 800px;
+            margin: 40px auto;
+            position: relative;
+            text-align: center;
+        }
+
+        /* 上方工作室 Logo 區塊 */
+        .studio-logo-box {
+            margin-bottom: 25px;
+        }
+
+        /* 小說簡介文字（無黑色底框、淡入動畫） */
+        .novel-intro {
+            max-width: 560px;
+            margin: 0 auto 30px auto;
+            font-size: 0.95rem;
+            color: #f0e6d2;
+            opacity: 0;
+            line-height: 2.2;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.8);
+            text-align: justify;
+            position: relative;
+            z-index: 3;
+            background: transparent;
+            padding: 0 10px;
+            animation: fadeInIntro 1.5s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeInIntro {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            100% {
+                opacity: 0.95;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- 互動標題區塊 --- */
+        .interactive-title-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto 25px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .logo-stack {
+            position: relative;
+            width: 100%;
+        }
+
+        .logo-stack img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 背景魔法陣：純放大與發光，不旋轉 */
+        .magic-star-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.2;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+            z-index: 1;
+        }
+
+        .title-img {
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 15px rgba(212,175,55,0.6));
+        }
+
+        .click-hint {
+            position: relative;
+            z-index: 2;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: var(--gold-accent);
+            letter-spacing: 0.25em;
+            margin-top: 12px;
+            opacity: 0.7;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .interactive-title-container:hover .magic-star-bg {
+            opacity: 0.95;
+            transform: scale(1.06);
+            filter: drop-shadow(0 0 25px rgba(255, 232, 117, 0.9));
+        }
+
+        .interactive-title-container:hover .title-img {
+            filter: drop-shadow(0 0 25px rgba(255, 232, 117, 0.95));
+            transform: scale(1.02);
+        }
+
+        .interactive-title-container:hover .click-hint {
+            opacity: 1;
+            transform: translateY(2px);
+            text-shadow: 0 0 12px rgba(255, 232, 117, 0.8);
+        }
+
+        /* 純淨發光燙金呼吸燈特效 */
+        .gold-breathe {
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffe875, #f3e5ab, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: breathingGlow 3s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes breathingGlow {
+            0% { filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.4)); opacity: 0.85; }
+            50% { filter: drop-shadow(0 0 10px rgba(255, 232, 117, 0.9)); opacity: 1; }
+            100% { filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.4)); opacity: 0.85; }
+        }
+
+        /* 導覽專區 */
+        .nav-section {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgba(12, 12, 12, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+        }
+        .nav-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-accent);
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 12px;
+            opacity: 0.85;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-links li {
+            margin-bottom: 10px;
+        }
+        .nav-links a {
+            display: inline-block;
+            color: #d8cebc;
+            text-decoration: none;
+            font-size: 1.05rem;
+            letter-spacing: 0.2em;
+            padding: 6px 20px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+        .nav-links a:hover {
+            color: #ffe875;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            text-shadow: 0 0 10px rgba(255, 232, 117, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .ornament-line {
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6), transparent);
+            margin: 25px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 魔法漂浮光點背景 -->
+    <div class="magic-particles"></div>
+
+    <div class="book-container">
+        <div style="position: relative; z-index: 2;">
+            
+            <!-- 上方：白魔法工作室 Logo -->
+            <div class="studio-logo-box">
+                <img src="whitemagic-logo.png" alt="白魔法藝術工作室 Logo" style="max-width: 110px; height: auto; filter: drop-shadow(0 0 10px rgba(212,175,55,0.6)); opacity: 0.95;">
+                <p style="font-family: 'Cinzel', serif; color: var(--gold-accent); letter-spacing: 0.35em; font-size: 0.75rem; opacity: 0.75; margin-top: 6px;">WHITE MAGIC ART STUDIO</p>
+            </div>
+            
+            <!-- 互動式標題區塊（點擊前往返鄉序章 prologue.html） -->
+            <div class="interactive-title-container" onclick="location.href='prologue.html';">
+                <div class="logo-stack">
+                    <img src="star.png" alt="魔法陣背景" class="magic-star-bg">
+                    <!-- 請準備一張寫著「聖術師：返鄉」的去背標題圖，例如 homecoming-title.png -->
+                    <img src="homecoming-title.png" alt="聖術師：返鄉" class="title-img">
+                </div>
+                <div class="click-hint">✦ 點 擊 以 上 標 題 翻 開 序 章 ✦</div>
+            </div>
+
+           <!-- 《返鄉》專屬小說前言簡介（直接使用與前作相同的經典史詩開場） -->
+            <p class="novel-intro">
+                當滾滾雷聲劃破夜空時，你可曾想過，那或許不是暴雨將至的預兆，而是ㄧ群隱密的人正在黑夜中為你與惡魔浴血奮戰？當滔天巨浪洶湧翻騰時，你可曾想過，那或許不是惡劣的天氣所致，而是他們正乘風破浪，為了守護這座世界而奔赴戰場？在他們之中，有人能憑藉意念撫平致命的傷口，有人能徒手移山倒海。他們從不公開現身，卻曾在歷史的陰影裡悄悄扭轉了無數文明的命運。其真實身份早已湮沒在歲月的塵埃中，唯有一個古老的稱呼流傳至今——<span class="gold-breathe">聖術師</span>。
+            </p>
+
+        </div>
+
+        <div class="ornament-line"></div>
+        
+        <!-- 質感導覽專區 -->
+        <div class="nav-section">
+            <div class="nav-title">Navigation</div>
+            <ul class="nav-links">
+                <li><a href="universe.html">聖術師宇宙觀</a></li>
+                <li><a href="character-gallery.html">角色形象專欄</a></li>
+                <li><a href="toc.html">完整章節目錄</a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
