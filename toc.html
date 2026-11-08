@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完整章節目錄 - 聖術師：返鄉</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 將返鄉目錄頁的書本容器底圖套用新圖片 (請將底圖命名為 homecoming-toc-bg.png) */
+        .book-container {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.70), rgba(5, 5, 5, 0.82)), 
+                        url('homecoming-toc-bg.png') no-repeat center center;
+            background-size: cover;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.15);
+            padding: 40px;
+            max-width: 800px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        /* 標題圖片專屬微光與置中樣式 (對應返鄉標題 homecoming-title-2.png) */
+        .toc-title-img {
+            max-width: 420px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto 10px auto;
+            filter: drop-shadow(0 0 18px rgba(212,175,55,0.7));
+            transition: transform 0.3s ease;
+        }
+        .toc-title-img:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(0 0 25px rgba(255,232,117,0.9));
+        }
+
+        /* 增強章節清單項目懸停微光特效 */
+        .chapter-list li a {
+            transition: all 0.3s ease;
+        }
+        .chapter-list li a:hover {
+            color: var(--gold-accent) !important;
+            text-shadow: 0 0 12px rgba(255, 232, 117, 0.9);
+            padding-left: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 魔法漂浮光點背景 -->
+    <div class="magic-particles"></div>
+
+    <div class="book-container">
+        <!-- 返鄉標題圖片 -->
+        <div style="text-align: center; margin-bottom: 15px;">
+            <a href="index.html" style="text-decoration: none;">
+                <img src="homecoming-title-2.png" alt="聖術師：返鄉" class="toc-title-img">
+            </a>
+        </div>
+
+        <h3 style="font-size: 1.1rem; margin-bottom: 25px; color: var(--gold-accent); text-align: center; letter-spacing: 0.25em; text-shadow: 0 2px 8px rgba(0,0,0,0.95);">完整章節目錄</h3>
+
+        <div class="divider" style="text-align: center; color: var(--gold-accent); margin-bottom: 25px; text-shadow: 0 0 8px rgba(255,232,117,0.8);">✦ ✦ ✦</div>
+
+        <!-- 返鄉章節清單（皆已標記預備中 `#`） -->
+        <ul class="chapter-list" style="list-style: none; padding: 0 10px; background: transparent; max-width: 520px; margin: 0 auto; line-height: 2.4; font-size: 1.05rem;">
+            <li style="margin-bottom: 12px; border-bottom: 1px dashed rgba(212,175,55,0.3); padding-bottom: 6px;"><a href="#" style="color: var(--gold-accent); text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">序章：炎君廟</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第一章：騷亂的夜空</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第二章：回憶的花院</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第三章：炎君的信徒</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第四章：難言之隱</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第五章：女人</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第六章：意外</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第七章：開眼</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第八章：床邊故事</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第九章：沒有度數的眼鏡</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第十章：三十週年慶</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第十一章：兄與弟</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第十二章：森林與大火</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第十三章：茂陽醫院的騷動</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第十四章：十年前的真相</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第十五章：孕胎樹</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第十六章：斷紙道士</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第十七章：火焰之下</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第十八章：城市之光地下教會</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第二十章：記得</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第二十一章：綠色亞斯蘭之星</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第二十二章：赴約</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">第二十三章：父與子</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #f0e6d2; text-decoration: none; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">最終章：返鄉</a></li>
+            <li><a href="#" style="color: #f0e6d2; text-decoration: none; font-size: 0.95rem; opacity: 0.95; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">後記：四魔君集結</a></li>
+        </ul>
+
+        <!-- 底部返回首頁 -->
+        <div class="nav-footer" style="display: flex; justify-content: center; border-top: 1px solid rgba(212, 175, 55, 0.3); margin-top: 40px; padding-top: 25px;">
+            <a href="index.html" class="magical-btn" style="padding: 10px 35px; font-size: 0.9rem;">← 返回首頁</a>
+        </div>
+    </div>
+
+</body>
+</html>
