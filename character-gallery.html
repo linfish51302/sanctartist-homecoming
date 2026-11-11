@@ -203,19 +203,65 @@
             line-height: 2.2;
             text-align: justify;
             margin-bottom: 25px;
+            font-style: normal; /* 確保直立無斜體 */
         }
 
-        .modal-quote {
-            font-family: 'Cinzel', serif;
-            font-style: italic;
-            color: #ffe875;
-            background: rgba(212, 175, 55, 0.08);
-            border-left: 3px solid var(--gold-accent);
-            padding: 15px 20px;
+        /* --- 奇幻能力高質感專屬區塊 (綠光 / 金色呼吸 / 紅色閃爍) --- */
+        .modal-powers-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .power-box {
             font-size: 0.95rem;
-            letter-spacing: 0.1em;
-            border-radius: 0 6px 6px 0;
+            letter-spacing: 0.08em;
+            padding: 14px 18px;
+            border-radius: 6px;
+            font-style: normal; /* 強制直立不斜體 */
+        }
+
+        /* 1. 木瞳術：綠色質感發光效果 */
+        .power-eye {
+            background: rgba(46, 204, 113, 0.07);
+            border: 1px solid rgba(46, 204, 113, 0.5);
+            color: #7ef9b0;
+            box-shadow: inset 0 0 15px rgba(46, 204, 113, 0.1);
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.4);
+            animation: eyeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes eyeGlow {
+            0%, 100% { box-shadow: inset 0 0 10px rgba(46, 204, 113, 0.1), 0 0 5px rgba(46, 204, 113, 0.2); }
+            50% { box-shadow: inset 0 0 20px rgba(46, 204, 113, 0.25), 0 0 12px rgba(46, 204, 113, 0.5); }
+        }
+
+        /* 2. 元素使天賦 / 其他正派能力：金色閃爍，像呼吸的感覺 */
+        .power-gift {
+            background: rgba(212, 175, 55, 0.07);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: #ffe875;
             box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.05);
+            animation: goldBreathing 3.5s ease-in-out infinite;
+        }
+
+        @keyframes goldBreathing {
+            0%, 100% { opacity: 0.8; text-shadow: 0 0 4px rgba(212, 175, 55, 0.3); border-color: rgba(212, 175, 55, 0.3); }
+            50% { opacity: 1; text-shadow: 0 0 12px rgba(212, 175, 55, 0.8); border-color: rgba(212, 175, 55, 0.8); box-shadow: inset 0 0 18px rgba(212, 175, 55, 0.2); }
+        }
+
+        /* 3. 反派魔力特性：紅色閃爍體詮釋 */
+        .power-villain {
+            background: rgba(231, 76, 60, 0.08);
+            border: 1px solid rgba(231, 76, 60, 0.6);
+            color: #ff8b7d;
+            box-shadow: inset 0 0 12px rgba(231, 76, 60, 0.15);
+            animation: villainPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes villainPulse {
+            0%, 100% { opacity: 0.75; text-shadow: 0 0 5px rgba(231, 76, 60, 0.4); border-color: rgba(231, 76, 60, 0.4); }
+            50% { opacity: 1; text-shadow: 0 0 15px rgba(231, 76, 60, 0.9); border-color: rgba(231, 76, 60, 0.9); box-shadow: inset 0 0 22px rgba(231, 76, 60, 0.3); }
         }
     </style>
 </head>
@@ -328,7 +374,11 @@
             <div class="modal-title" id="modalTitle">角色名稱</div>
             <div class="modal-subtitle" id="modalSubtitle">身分與類型</div>
             <div class="modal-body" id="modalBody">詳細敘述文字...</div>
-            <div class="modal-quote" id="modalQuote">「角色經典台詞」</div>
+            
+            <!-- 動態能力展示區塊 -->
+            <div class="modal-powers-container" id="modalPowersContainer">
+                <!-- 動態填入 -->
+            </div>
         </div>
     </div>
 
@@ -339,37 +389,52 @@
                 title: "梁景皓",
                 subtitle: "LIANG JINGHAO ｜ 木之元素使",
                 body: "梁家長子，綠色亞斯蘭之星出現之夜誕生的『木翼』繼承者。與重視戰鬥及家族使命的父親不同，他始終相信聖術也能成為救人的力量。離開家族多年後，他選擇以平凡的生活守護兒子，卻逐漸發現，自己終究無法逃離過去。",
-                quote: "木瞳術｜共感：能夠感知他人的情緒變化，察覺言語背後難以表達的心情。元素使天賦｜花語：能夠吸收不同花卉的精華，藉此獲得各種特殊能力。"
+                powers: [
+                    { type: "eye", text: "木瞳術 ｜ 共感：能夠感知他人的情緒變化，察覺言語背後難以表達的心情。" },
+                    { type: "gift", text: "元素使天賦 ｜ 花語：能夠吸收不同花卉的精華，藉此獲得各種特殊能力。" }
+                ]
             },
             jingyi: {
                 title: "梁景毅",
                 subtitle: "LIANG JINGYI ｜ 木之術器使",
-                body: "梁家次子，理性、嚴謹，習慣將責任放在個人情感之前。作為木之術器使，他以堅不可摧的防禦與精準的戰鬥方式著稱。看似冷漠的態度背後，藏著對家族難以割捨的牽掛。",
-                quote: "木瞳術｜護盾：擁有強大的精神防禦能力，能夠抵禦敵人的心靈控制。術器：黑金色長槍，能操控植物並創造玄武木。"
+                body: "梁家次子，理性、嚴謹，習慣將責任放在個人情感之前。作為木之術器使，他以武術與術器精準的戰鬥方式著稱。看似冷漠的態度背後，藏著對家族難以割捨的牽掛。",
+                powers: [
+                    { type: "eye", text: "木瞳術 ｜ 護盾：擁有強大的精神防禦能力，能夠抵禦敵人的心靈控制。" },
+                    { type: "gift", text: "術器特性 ｜ 黑金色葉形長槍：能操控植物並召喚術之木-玄武木。" }
+                ]
             },
             jinhui: {
                 title: "梁晉輝",
                 subtitle: "LIANG JINHUI ｜ 木之元素使",
                 body: "梁家家主，也是茂陽集團的重要掌權者。擁有深不可測的木之聖術實力，對家族傳承與責任有著強烈的信念。然而，掌握記憶力量的他，似乎也隱藏著某些不願讓家人知曉的過去。",
-                quote: "木瞳術｜記憶：能夠讀取他人的記憶，甚至進行竄改與抹除。元素使天賦｜忘憂木：具有強大的攻擊、驅魔與記憶儲存能力。"
+                powers: [
+                    { type: "eye", text: "木瞳術 ｜ 記憶：能夠讀取他人的記憶，甚至進行竄改與抹除。" },
+                    { type: "gift", text: "元素使天賦 ｜ 忘憂木：熟練操縱與招喚具有強大的攻擊、驅魔與記憶儲存能力的術之木-『忘憂木』。" }
+                ]
             },
             yukai: {
                 title: "梁昱鎧",
                 subtitle: "LIANG JUKAI ｜ 10歲・國小四年級",
                 body: "景皓的兒子，個性善良、好奇心旺盛，喜歡漫畫與充滿想像力的故事。原本只是個平凡的小學生，直到某天，他的雙眼突然變成綠色，開始聽見周圍人們的心聲，也因此踏入父親一直隱瞞的世界。",
-                quote: "木瞳術｜讀心：能夠直接讀取他人的心聲，聽見對方未曾說出口的想法。（其他天賦尚未覺醒或確認）"
+                powers: [
+                    { type: "eye", text: "木瞳術 ｜ 讀心：能夠直接讀取他人的心聲，聽見對方未曾說出口的想法。（其他天賦尚未覺醒或確認）" }
+                ]
             },
             guohao: {
                 title: "張國豪 (炎君)",
                 subtitle: "FLAME LORD ｜ 魔君",
                 body: "自陽明山沉睡中甦醒的神祕魔君，擁有令人畏懼的火焰力量。冷峻而難以捉摸的外表下，卻藏著一段連自己都無法想起的過去。隨著記憶的碎片逐漸浮現，一場跨越數十年的恩怨，也開始重新燃燒。",
-                quote: "魔力特性｜火焰：擁有極具破壞力的火之魔力，能夠操縱猛烈的火焰，展現遠超常人的力量。"
+                powers: [
+                    { type: "villain", text: "魔力特性 ｜ 惡火：擁有極具破壞力的火之魔力，能夠操縱猛烈的火焰，展現遠超常人的力量。" }
+                ]
             },
             yonghua: {
                 title: "曾永華 (食人君)",
                 subtitle: "DEVOURER LORD ｜ 魔君",
                 body: "四魔君之一，總是帶著輕浮而難以捉摸的笑容。擁有改變容貌的詭異魔力，能夠隱藏身分、遊走於人群之中。他似乎知道許多不為人知的秘密，卻總喜歡在最關鍵的時刻，留下令人不安的笑容。",
-                quote: "魔力特性｜擬態易容：透過攝取他人的血肉偽裝成對方。身邊經常伴隨一隻神祕的金色甲蟲。"
+                powers: [
+                    { type: "villain", text: "魔力特性 ｜ 擬態易容：透過攝取他人的血肉偽裝成對方。身邊經常伴隨一隻神祕的金色甲蟲。" }
+                ]
             }
         };
 
@@ -380,7 +445,24 @@
             document.getElementById('modalTitle').innerText = data.title;
             document.getElementById('modalSubtitle').innerText = data.subtitle;
             document.getElementById('modalBody').innerText = data.body;
-            document.getElementById('modalQuote').innerText = data.quote;
+
+            // 動態生成能力標籤（套用綠光、金色呼吸、紅色閃爍）
+            const powersContainer = document.getElementById('modalPowersContainer');
+            powersContainer.innerHTML = '';
+            
+            data.powers.forEach(power => {
+                const div = document.createElement('div');
+                div.classList.add('power-box');
+                if (power.type === 'eye') {
+                    div.classList.add('power-eye');
+                } else if (power.type === 'gift') {
+                    div.classList.add('power-gift');
+                } else if (power.type === 'villain') {
+                    div.classList.add('power-villain');
+                }
+                div.innerText = power.text;
+                powersContainer.appendChild(div);
+            });
 
             document.getElementById('characterModal').classList.add('active');
             document.body.style.overflow = 'hidden'; // 背景禁止滾動
