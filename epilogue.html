@@ -828,26 +828,76 @@
                 <div class="poster-cta-bar">✦ 點擊動態海報查看《虎穴》Logo 與故事大綱</div>
             </div>
 
-            <!-- 點擊後展開：虎穴 Logo ＋ 故事大綱（低亮度暗底圖） -->
-            <div class="tiger-den-panel" id="tigerDenPanel">
-                <div class="tiger-den-inner">
-                    <div class="tiger-logo-wrap">
-                        <!-- 若有獨立虎穴 Logo 檔可放 tiger-den-logo.png，未放置時會自動隱藏破圖並顯示標題 -->
-                        <img src="tiger-den-logo.png" alt="聖術師：虎穴 Logo" onerror="this.style.display='none';">
-                        <div class="tiger-logo-fallback">《聖術師：虎穴》</div>
-                        <div class="tiger-arc-tag">木之章・第二部</div>
-                    </div>
+      <!-- 點擊後展開：虎穴 Logo ＋ 故事大綱（低亮度暗底圖） -->
+<div class="tiger-den-panel" id="tigerDenPanel">
+    <style>
+        .tiger-den-panel {
+            display: none;
+            margin-top: 28px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9);
+            position: relative;
+            text-align: left;
+            background:
+                linear-gradient(180deg, rgba(6, 6, 8, 0.88) 0%, rgba(4, 4, 6, 0.95) 100%),
+                url('8C85AD68-6C71-4D49-AA0F-7AA830792961.png') center / cover no-repeat;
+        }
 
-                    <div class="synopsis-text">
-                        <p>一抹紅色身影出現在山間。沒過多久，台灣各地接連傳出失蹤消息。</p>
-                        <p>梁景皓才剛回到家人身邊，就得以木翼的身分，在香港的亞洲聖術會上向眾人提出警告。有人願意支援台灣，也有人寧可維持眼下的平衡。會議結束後，一首留下許多疑問的預言詩，將線索指向了泰國。</p>
-                        <p>為了趕在魔皇之前找到一件危險的失物，景皓、景毅與景瑜決定一同出發。三人已經很久沒有這樣朝夕相處。旅途中，有些關於母親的話終於有人開口，有些兒時的回憶，他們卻怎麼也對不上。</p>
-                        <p>而在那件失物的下落逐漸明朗之際，三兄妹才意識到，可能還有人正等著他們把它找出來，而那個人似乎遠比想像中的熟悉…</p>
-                        <p class="synopsis-closing">《聖術師：虎穴》敬請期待。</p>
-                    </div>
+        .tiger-den-panel.is-open {
+            display: block;
+            animation: fadeInPanel 0.4s ease;
+        }
 
-                    <div class="demon-lords-btn-wrap">
-                        <button type="button" class="demon-lords-btn" onclick="openLordsModal('guohao')">
+        .tiger-den-inner {
+            padding: 36px 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tiger-logo-wrap {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .tiger-logo-wrap img {
+            max-width: 320px;
+            width: 85%;
+            height: auto;
+            margin: 0 auto 10px;
+            display: block;
+            filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.5));
+        }
+
+        .tiger-arc-tag {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 0.9rem;
+            color: #7ef9b0;
+            letter-spacing: 0.22em;
+        }
+    </style>
+
+    <div class="tiger-den-inner">
+        <div class="tiger-logo-wrap">
+            <img src="tiger-den-logo.png" alt="聖術師：虎穴 Logo">
+            <div class="tiger-arc-tag">木之章・第二部</div>
+        </div>
+
+        <div class="synopsis-text">
+            <p>一抹紅色身影出現在山間。沒過多久，台灣各地接連傳出失蹤消息。</p>
+            <p>梁景皓才剛回到家人身邊，就得以木翼的身分，在香港的亞洲聖術會上向眾人提出警告。有人願意支援台灣，也有人寧可維持眼下的平衡。會議結束後，一首留下許多疑問的預言詩，將線索指向了泰國。</p>
+            <p>為了趕在魔皇之前找到一件危險的失物，景皓、景毅與景瑜決定一同出發。三人已經很久沒有這樣朝夕相處。旅途中，有些關於母親的話終於有人開口，有些兒時的回憶，他們卻怎麼也對不上。</p>
+            <p>而在那件失物的下落逐漸明朗之際，三兄妹才意識到，可能還有人正等著他們把它找出來，而那個人似乎遠比想像中的熟悉…</p>
+            <p class="synopsis-closing">《聖術師：虎穴》敬請期待。</p>
+        </div>
+
+        <div class="demon-lords-btn-wrap">
+            <button type="button" class="demon-lords-btn" onclick="openLordsModal('guohao')">
+  
                             ✦ 四魔君角色檔案搶先看 ✦
                         </button>
                     </div>
