@@ -58,8 +58,8 @@
             width: 100%;
             height: auto;
             border-radius: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.4); /* 金屬微光邊框 */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.15); /* 沉浸式陰影 */
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.15);
             filter: sepia(8%) contrast(105%);
             transition: transform 0.4s ease, filter 0.4s ease;
         }
@@ -217,7 +217,7 @@
             <p>掌心裡，浮現出一點柔和的白光。</p>
             <p>祂將手移到唇邊，輕輕吹了一口氣。</p>
             <p>那點白光隨風飄起，在空中舒展成一隻小小的飛鳥。</p>
-            <p>牠全身由純白的光羽構成，像鴿子一樣輕盈，翅膀邊緣散落著細緻的金色光點。</p>
+            <p>牠全身由純白的光羽構成，像鴿子一樣輕盈，翅膀邊緣散落著細緻的光點。</p>
             <p>牠在空中盤旋了一圈。</p>
             <p>最後，停在那棵幾乎枯死的銀杏樹上。</p>
             <p>景皓屏住呼吸。</p>
@@ -826,11 +826,20 @@
 
         </div>
 
-        <!-- 底部返回導覽 -->
-        <div class="nav-footer" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 50px; padding-top: 25px; gap: 10px;">
-            <a href="chapter25.html" class="magical-btn" style="padding: 10px 20px; font-size: 0.85rem; flex-shrink: 0;">← 上一章</a>
-            <span style="color: var(--gold-accent); font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.1em; text-align: center;">CHAPTER XXVI</span>
-            <a href="epilogue.html" class="magical-btn" style="padding: 10px 20px; font-size: 0.85rem; flex-shrink: 0;">後記 →</a>
+        <!-- 底部返回導覽與彩蛋解鎖入口 -->
+        <div class="nav-footer" style="display: flex; flex-direction: column; align-items: center; border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 50px; padding-top: 25px; gap: 15px;">
+
+            <!-- 🌟 驚喜解鎖按鈕（傳送至獨立隱藏角色檔案頁） -->
+            <a href="hidden-characters.html" class="magical-btn" style="padding: 14px 30px; font-size: 1rem; background: linear-gradient(135deg, #d4af37, #aa771c); color: #121212; font-weight: bold; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); text-align: center; width: 100%; max-width: 360px;">
+                ✦ 恭喜讀完！解鎖隱藏角色檔案 ✦
+            </a>
+
+            <!-- 一般導覽按鈕列 -->
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 10px;">
+                <a href="chapter25.html" class="magical-btn" style="padding: 10px 20px; font-size: 0.85rem; flex-shrink: 0;">← 上一章</a>
+                <span style="color: var(--gold-accent); font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.1em; text-align: center;">CHAPTER XXVI</span>
+                <a href="epilogue.html" class="magical-btn" style="padding: 10px 20px; font-size: 0.85rem; flex-shrink: 0;">後記 →</a>
+            </div>
         </div>
     </div>
 
