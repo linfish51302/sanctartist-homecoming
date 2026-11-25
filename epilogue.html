@@ -77,6 +77,362 @@
             margin-top: 12px;
             opacity: 0.75;
         }
+
+        /* --- 續作預告：聖術師：虎穴 --- */
+        .sequel-preview-section {
+            margin-top: 64px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.28);
+            text-align: center;
+        }
+
+        .sequel-kicker {
+            font-family: 'Cinzel', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.32em;
+            color: var(--gold-accent);
+            opacity: 0.85;
+            margin-bottom: 8px;
+        }
+
+        .sequel-heading {
+            font-size: 1.65rem;
+            color: #f3ead8;
+            letter-spacing: 0.14em;
+            margin-bottom: 24px;
+        }
+
+        .poster-trigger-card {
+            position: relative;
+            max-width: 380px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.55);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.85), 0 0 24px rgba(212, 175, 55, 0.18);
+            cursor: pointer;
+            background: #09090b;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .poster-trigger-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.95);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.9), 0 0 32px rgba(212, 175, 55, 0.35);
+        }
+
+        .coming-soon-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 5;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(12, 12, 14, 0.88);
+            border: 1px solid rgba(212, 175, 55, 0.88);
+            color: #ffe875;
+            font-family: 'Cinzel', serif;
+            font-size: 0.72rem;
+            font-weight: bold;
+            letter-spacing: 0.2em;
+            box-shadow: 0 0 14px rgba(212, 175, 55, 0.3);
+        }
+
+        .poster-video-box {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: #070709;
+            overflow: hidden;
+        }
+
+        .poster-video-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .poster-cta-bar {
+            padding: 14px 16px;
+            background: linear-gradient(to bottom, rgba(18, 18, 20, 0.92), rgba(9, 9, 11, 0.98));
+            border-top: 1px solid rgba(212, 175, 55, 0.25);
+            color: var(--gold-accent);
+            font-size: 0.9rem;
+            letter-spacing: 0.12em;
+        }
+
+        /* 點擊動態海報後展開的虎穴 Logo ＋ 故事大綱面板（低亮度暗底圖） */
+        .tiger-den-panel {
+            display: none;
+            margin-top: 28px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.88);
+            position: relative;
+            text-align: left;
+            background:
+                linear-gradient(180deg, rgba(8, 8, 10, 0.85) 0%, rgba(6, 6, 8, 0.93) 100%),
+                url('8C85AD68-6C71-4D49-AA0F-7AA830792961.png') center / cover no-repeat;
+        }
+
+        .tiger-den-panel.is-open {
+            display: block;
+            animation: fadeInPanel 0.4s ease;
+        }
+
+        @keyframes fadeInPanel {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tiger-den-inner {
+            padding: 34px 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tiger-logo-wrap {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .tiger-logo-wrap img {
+            max-width: 240px;
+            height: auto;
+            margin: 0 auto 10px;
+            display: block;
+            filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.45));
+        }
+
+        .tiger-logo-fallback {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--gold-accent);
+            letter-spacing: 0.22em;
+            text-shadow: 0 0 14px rgba(212, 175, 55, 0.4);
+        }
+
+        .tiger-arc-tag {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #7ef9b0;
+            letter-spacing: 0.2em;
+        }
+
+        .synopsis-text p {
+            color: #e4dac8;
+            font-size: 1.03rem;
+            line-height: 2.05;
+            margin-bottom: 1.15em;
+            text-indent: 0 !important;
+            text-align: justify;
+        }
+
+        .synopsis-closing {
+            margin-top: 18px;
+            color: var(--gold-accent) !important;
+            font-weight: bold;
+            letter-spacing: 0.14em;
+            text-align: center !important;
+        }
+
+        .demon-lords-btn-wrap {
+            margin-top: 26px;
+            text-align: center;
+        }
+
+        .demon-lords-btn {
+            padding: 13px 26px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            letter-spacing: 0.12em;
+            border-radius: 8px;
+            border: 1px solid rgba(231, 76, 60, 0.75);
+            background: linear-gradient(135deg, rgba(130, 24, 20, 0.92), rgba(45, 10, 12, 0.96));
+            color: #ffd6d0;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.28);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .demon-lords-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 28px rgba(231, 76, 60, 0.5);
+        }
+
+        /* --- 四魔君角色檔案搶先看彈窗 --- */
+        .lords-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 7, 0.86);
+            backdrop-filter: blur(8px);
+            z-index: 1200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lords-modal-overlay.active {
+            display: flex;
+        }
+
+        .lords-modal-box {
+            width: 100%;
+            max-width: 780px;
+            max-height: 88vh;
+            overflow-y: auto;
+            background: linear-gradient(145deg, rgba(22, 18, 18, 0.97), rgba(10, 10, 12, 0.99));
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            border-radius: 12px;
+            padding: 32px 28px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.92), 0 0 24px rgba(212, 175, 55, 0.14);
+        }
+
+        .lords-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--gold-accent);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        .lords-modal-close:hover {
+            transform: scale(1.15);
+        }
+
+        .lords-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 18px 0 22px;
+        }
+
+        .lords-tab-btn {
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            background: rgba(255, 255, 255, 0.04);
+            color: #d8cebc;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .lords-tab-btn.active {
+            border-color: rgba(231, 76, 60, 0.85);
+            background: rgba(231, 76, 60, 0.18);
+            color: #ff9c90;
+            font-weight: bold;
+        }
+
+        .lords-showcase {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 680px) {
+            .lords-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lord-portrait-frame {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #070709;
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lord-portrait-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: sepia(8%) contrast(106%);
+        }
+
+        .lord-detail-name {
+            font-size: 1.5rem;
+            color: var(--gold-accent);
+            margin-bottom: 4px;
+            text-align: left;
+        }
+
+        .lord-detail-sub {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.16em;
+            color: #b5aa96;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: left;
+        }
+
+        .lord-detail-bio {
+            color: #e2d8c5;
+            line-height: 2.05;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .lord-power-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .lord-power-eye {
+            padding: 13px 16px;
+            border-radius: 6px;
+            background: rgba(46, 204, 113, 0.08);
+            border: 1px solid rgba(46, 204, 113, 0.55);
+            color: #7ef9b0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.35);
+            animation: eyeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes eyeGlow {
+            0%, 100% { box-shadow: inset 0 0 10px rgba(46, 204, 113, 0.1), 0 0 5px rgba(46, 204, 113, 0.2); }
+            50% { box-shadow: inset 0 0 20px rgba(46, 204, 113, 0.25), 0 0 12px rgba(46, 204, 113, 0.5); }
+        }
+
+        .lord-power-villain {
+            padding: 13px 16px;
+            border-radius: 6px;
+            background: rgba(231, 76, 60, 0.09);
+            border: 1px solid rgba(231, 76, 60, 0.65);
+            color: #ff8b7d;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            animation: villainPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes villainPulse {
+            0%, 100% { opacity: 0.78; text-shadow: 0 0 5px rgba(231, 76, 60, 0.4); border-color: rgba(231, 76, 60, 0.45); }
+            50% { opacity: 1; text-shadow: 0 0 15px rgba(231, 76, 60, 0.9); border-color: rgba(231, 76, 60, 0.92); box-shadow: inset 0 0 22px rgba(231, 76, 60, 0.3); }
+        }
     </style>
 </head>
 <body>
@@ -456,6 +812,49 @@
 
         </div>
 
+        <!-- ==================== 續作預告：聖術師：虎穴 ==================== -->
+        <section class="sequel-preview-section" id="sequelPreview">
+            <div class="sequel-kicker">SEQUEL TEASER</div>
+            <h3 class="sequel-heading">續作預告｜《聖術師：虎穴》</h3>
+
+            <!-- 動態海報點擊區 -->
+            <div class="poster-trigger-card" onclick="toggleTigerDenPanel()" role="button" tabindex="0" aria-label="點擊展開聖術師：虎穴 Logo 與故事大綱">
+                <div class="coming-soon-badge">COMING SOON</div>
+                <div class="poster-video-box">
+                    <video autoplay loop muted playsinline>
+                        <source src="聖術師設計區.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="poster-cta-bar">✦ 點擊動態海報查看《虎穴》Logo 與故事大綱</div>
+            </div>
+
+            <!-- 點擊後展開：虎穴 Logo ＋ 故事大綱（低亮度暗底圖） -->
+            <div class="tiger-den-panel" id="tigerDenPanel">
+                <div class="tiger-den-inner">
+                    <div class="tiger-logo-wrap">
+                        <!-- 若有獨立虎穴 Logo 檔可放 tiger-den-logo.png，未放置時會自動隱藏破圖並顯示標題 -->
+                        <img src="tiger-den-logo.png" alt="聖術師：虎穴 Logo" onerror="this.style.display='none';">
+                        <div class="tiger-logo-fallback">《聖術師：虎穴》</div>
+                        <div class="tiger-arc-tag">木之章・第二部</div>
+                    </div>
+
+                    <div class="synopsis-text">
+                        <p>一抹紅色身影出現在山間。沒過多久，台灣各地接連傳出失蹤消息。</p>
+                        <p>梁景皓才剛回到家人身邊，就得以木翼的身分，在香港的亞洲聖術會上向眾人提出警告。有人願意支援台灣，也有人寧可維持眼下的平衡。會議結束後，一首留下許多疑問的預言詩，將線索指向了泰國。</p>
+                        <p>為了趕在魔皇之前找到一件危險的失物，景皓、景毅與景瑜決定一同出發。三人已經很久沒有這樣朝夕相處。旅途中，有些關於母親的話終於有人開口，有些兒時的回憶，他們卻怎麼也對不上。</p>
+                        <p>而在那件失物的下落逐漸明朗之際，三兄妹才意識到，可能還有人正等著他們把它找出來，而那個人似乎遠比想像中的熟悉…</p>
+                        <p class="synopsis-closing">《聖術師：虎穴》敬請期待。</p>
+                    </div>
+
+                    <div class="demon-lords-btn-wrap">
+                        <button type="button" class="demon-lords-btn" onclick="openLordsModal('guohao')">
+                            ✦ 四魔君角色檔案搶先看 ✦
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- 底部返回導覽 -->
         <div class="nav-footer" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 50px; padding-top: 25px; gap: 10px;">
             <a href="chapter26.html" class="magical-btn" style="padding: 10px 20px; font-size: 0.85rem; flex-shrink: 0;">← 最終章</a>
@@ -464,5 +863,114 @@
         </div>
     </div>
 
+    <!-- ==================== 四魔君角色檔案搶先看彈窗 ==================== -->
+    <div class="lords-modal-overlay" id="lordsModal" onclick="outsideCloseLordsModal(event)">
+        <div class="lords-modal-box">
+            <button type="button" class="lords-modal-close" onclick="closeLordsModal()">&times;</button>
+            <div class="sequel-kicker" style="text-align: left;">FOUR DEMON LORDS PREVIEW</div>
+            <h3 style="font-size: 1.5rem; color: #f3ead8; letter-spacing: 0.12em;">四魔君角色檔案搶先看</h3>
+
+            <div class="lords-tabs">
+                <button type="button" class="lords-tab-btn active" data-lord="guohao" onclick="switchLordTab('guohao')">張國豪 (炎君)</button>
+                <button type="button" class="lords-tab-btn" data-lord="yonghua" onclick="switchLordTab('yonghua')">曾永華 (食人君)</button>
+                <button type="button" class="lords-tab-btn" data-lord="jingsheng" onclick="switchLordTab('jingsheng')">梁景聖（毒君）</button>
+                <button type="button" class="lords-tab-btn" data-lord="yingtong" onclick="switchLordTab('yingtong')">沈映彤（紅君）</button>
+            </div>
+
+            <div id="lordDetailContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const fourLordsData = {
+            guohao: {
+                name: "張國豪 (炎君)",
+                sub: "FLAME LORD ｜ 魔君",
+                img: "guohaonew.png",
+                bio: "四魔君之一，自陽明山沉睡中甦醒的神祕魔君，擁有令人畏懼的火焰力量。冷峻而難以捉摸的外表下，卻藏著一段連自己都無法想起的過去。隨著記憶的碎片逐漸浮現，一場跨越數十年的恩怨，也開始重新燃燒。",
+                powers: [
+                    { kind: "villain", text: "魔力特性 ｜ 惡火：擁有極具破壞力的火之魔力，能夠操縱猛烈的火焰，展現遠超常人的力量。" }
+                ]
+            },
+            yonghua: {
+                name: "曾永華 (食人君)",
+                sub: "DEVOURER LORD ｜ 魔君",
+                img: "yonghuanew.png",
+                bio: "四魔君之一，總是帶著輕浮而難以捉摸的笑容。擁有改變容貌的詭異魔力，能夠隱藏身分、遊走於人群之中。他似乎知道許多不為人知的秘密，卻總喜歡在最關鍵的時刻，留下令人不安的笑容。",
+                powers: [
+                    { kind: "villain", text: "魔力特性 ｜ 擬態易容：透過攝取他人的血肉偽裝成對方。身邊經常伴隨一隻神祕的金色甲蟲。" }
+                ]
+            },
+            jingsheng: {
+                name: "梁景聖（毒君）",
+                sub: "POISON LORD ｜ 魔君",
+                img: "jingsheng.png",
+                bio: "四魔君之一，外貌停留在少年時期。四魔君聚首時，他多半沉默。直到曾永華喊出「梁景聖」，他才停下腳步，冷冷地請對方別再用這個名字叫他。那雙枯葉色的虹膜，曾短暫閃過一抹翡翠綠。他說自己沒有家人，那一瞬間的眼神，卻讓人想起梁景皓。",
+                powers: [
+                    { kind: "eye", text: "木瞳術 ｜ 痛苦：能使對方感受到極度的痛苦。" },
+                    { kind: "villain", text: "魔力特性 ｜ 植物之毒：能操控植物所含的毒素，使其變換形態，發動不同形式的攻擊。" }
+                ]
+            },
+            yingtong: {
+                name: "沈映彤（紅君）",
+                sub: "THE RED DEMON LORD ｜ 魔君",
+                img: "yingtong.png",
+                bio: "四魔君之一，外貌凍在十歲。她總是赤著腳，穿一襲紅裙，長髮繫著紅緞帶。其他魔君談起交戰的事，她常在一旁笑著插話，還會興致勃勃地提起自己的「寶貝們」。她說起牠們的語氣，就像在跟人分享心愛的玩伴。",
+                powers: [
+                    { kind: "villain", text: "魔力特性 ｜ 召喚鬼魔：能召喚鬼魔，其中包括形似飛蛾的血紅色異形「血蛾惡魔」。" }
+                ]
+            }
+        };
+
+        function toggleTigerDenPanel() {
+            const panel = document.getElementById('tigerDenPanel');
+            panel.classList.toggle('is-open');
+        }
+
+        function switchLordTab(lordKey) {
+            const data = fourLordsData[lordKey];
+            if (!data) return;
+
+            document.querySelectorAll('.lords-tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lord === lordKey);
+            });
+
+            const powerHtml = data.powers.map(p => {
+                const cls = p.kind === 'eye' ? 'lord-power-eye' : 'lord-power-villain';
+                return `<div class="${cls}">${p.text}</div>`;
+            }).join('');
+
+            document.getElementById('lordDetailContent').innerHTML = `
+                <div class="lords-showcase">
+                    <div class="lord-portrait-frame">
+                        <img src="${data.img}" alt="${data.name}">
+                    </div>
+                    <div>
+                        <div class="lord-detail-name">${data.name}</div>
+                        <div class="lord-detail-sub">${data.sub}</div>
+                        <div class="lord-detail-bio">${data.bio}</div>
+                        <div class="lord-power-list">${powerHtml}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openLordsModal(defaultKey = 'guohao') {
+            switchLordTab(defaultKey);
+            document.getElementById('lordsModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLordsModal() {
+            document.getElementById('lordsModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function outsideCloseLordsModal(event) {
+            if (event.target.id === 'lordsModal') {
+                closeLordsModal();
+            }
+        }
+    </script>
 </body>
 </html>
