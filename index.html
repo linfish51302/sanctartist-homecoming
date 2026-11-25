@@ -247,6 +247,131 @@
             position: relative;
             z-index: 3;
         }
+
+        /* --- 點擊閱讀後彈出小視窗樣式 --- */
+        .read-prompt-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 4, 6, 0.86);
+            backdrop-filter: blur(8px);
+            z-index: 1500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .read-prompt-overlay.active {
+            display: flex;
+        }
+
+        .read-prompt-box {
+            width: 100%;
+            max-width: 460px;
+            background: linear-gradient(145deg, rgba(24, 21, 16, 0.98), rgba(10, 10, 12, 0.99));
+            border: 1px solid rgba(212, 175, 55, 0.65);
+            border-radius: 14px;
+            padding: 36px 28px 30px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.92), 0 0 28px rgba(212, 175, 55, 0.22);
+            animation: promptPop 0.3s ease;
+        }
+
+        @keyframes promptPop {
+            from { opacity: 0; transform: translateY(12px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .read-prompt-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: #d4af37;
+            font-size: 1.7rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+
+        .read-prompt-close:hover {
+            color: #ffe875;
+            transform: scale(1.15);
+        }
+
+        .read-prompt-logo {
+            max-width: 260px;
+            width: 82%;
+            height: auto;
+            margin: 0 auto 18px;
+            display: block;
+            filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.65));
+        }
+
+        .read-prompt-notice {
+            color: #f0e6d2;
+            font-size: 1.02rem;
+            line-height: 1.9;
+            letter-spacing: 0.06em;
+            margin: 0 0 26px;
+        }
+
+        .read-prompt-notice strong {
+            color: #ffe875;
+            font-weight: bold;
+        }
+
+        .read-prompt-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-start-reading {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 232, 117, 0.9);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.92), rgba(145, 110, 22, 0.95));
+            color: #111;
+            font-weight: bold;
+            font-size: 0.98rem;
+            letter-spacing: 0.14em;
+            cursor: pointer;
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-start-reading:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 26px rgba(255, 232, 117, 0.7);
+        }
+
+        .btn-prequel-link {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 300px;
+            padding: 11px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.65);
+            background: rgba(212, 175, 55, 0.1);
+            color: #ffe875;
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .btn-prequel-link:hover {
+            transform: translateY(-2px);
+            background: rgba(212, 175, 55, 0.22);
+            border-color: rgba(255, 232, 117, 0.95);
+        }
     </style>
 </head>
 <body>
@@ -271,8 +396,8 @@
                 <p style="font-family: 'Cinzel', serif; color: var(--gold-accent); letter-spacing: 0.35em; font-size: 0.75rem; opacity: 0.75; margin-top: 6px;">WHITE MAGIC ART STUDIO</p>
             </div>
             
-            <!-- 互動式標題與魔法陣區塊（維持原位置與設定） -->
-            <div class="interactive-title-container" onclick="location.href='prologue.html';">
+            <!-- 互動式標題與魔法陣區塊（點擊彈出閱讀提醒視窗） -->
+            <div class="interactive-title-container" onclick="openReadPrompt()" role="button" tabindex="0" aria-label="點擊進入閱讀提醒">
                 <div class="logo-stack">
                     <img src="star.png" alt="魔法陣背景" class="magic-star-bg">
                     <div class="magic-enter-text">點 擊 進 入</div>
@@ -300,8 +425,39 @@
         </div>
     </div>
 
+    <!-- 點擊閱讀後彈出提醒小視窗 -->
+    <div class="read-prompt-overlay" id="readPromptModal" onclick="outsideCloseReadPrompt(event)">
+        <div class="read-prompt-box">
+            <button type="button" class="read-prompt-close" onclick="closeReadPrompt()" aria-label="關閉視窗">&times;</button>
+            <img src="homecoming-title-2.png" alt="聖術師：返鄉 Logo" class="read-prompt-logo">
+            <p class="read-prompt-notice">
+                貼心提醒：建議先閱讀前作<strong>《聖術師：失落的繼承者》</strong>，完整掌握世界觀與人物伏筆，閱讀體驗將更加深刻完整。
+            </p>
+            <div class="read-prompt-actions">
+                <button type="button" class="btn-start-reading" onclick="location.href='prologue.html'">直接開始閱讀《返鄉》</button>
+                <a href="https://linfish51302.github.io/sanctarist-novel/index.html" class="btn-prequel-link">前往《聖術師：失落的繼承者》</a>
+            </div>
+        </div>
+    </div>
+
     <!-- 🌟 強制啟動自動播放與循環播放的 JavaScript -->
     <script>
+        function openReadPrompt() {
+            document.getElementById('readPromptModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReadPrompt() {
+            document.getElementById('readPromptModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function outsideCloseReadPrompt(event) {
+            if (event.target.id === 'readPromptModal') {
+                closeReadPrompt();
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const video = document.getElementById('bgVideo');
             video.muted = true; // 確保靜音以符合瀏覽器自動播放政策
